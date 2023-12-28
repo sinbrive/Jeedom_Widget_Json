@@ -1,0 +1,65 @@
+<div class="cmd cmd-widget #history#" data-type="info" 
+     data-subtype="string" data-template="wjson" data-cmd_id="#id#" 
+     data-cmd_uid="#uid#" data-version="#version#" data-eqLogic_id="#eqLogic_id#">
+
+    <template>
+        <div>itemSize : 1em ({{Taille du nom d'item}}).</div>
+        <div>valSize : 1em ({{Taille de la valeur d'item}}).</div>
+    </template>
+
+    <div class="container#id#"></div>
+
+    <style>
+        .value#id#{
+          color: #ccc;
+          padding-left:5px;
+          font-size: 1em;
+        }
+
+        .value#id#:after {
+            content: '\a';
+            white-space: pre;
+        }
+    </style>
+
+    <script>
+        jeedom.cmd.addUpdateFunction('#id#', function(_options) {
+            let cmd = $('.cmd[data-cmd_id=#id#]')
+
+            cmd.attr('title', '{{Date de valeur}} : ' + _options.valueDate + '<br/>{{Date de collecte}} : ' + _options.collectDate);
+
+            $('.cmd[data-cmd_uid=#uid#] .container#id#').empty();
+
+            data = _options.display_value.replace(/'/g, "\""); // replace ' by " to make it json
+
+            var json_ok = true;
+            try {
+                var obj = JSON.parse(data);
+            } catch (err) {
+                json_ok = false;
+            }
+            if (json_ok) {
+                let len = Object.keys(obj).length;
+                if (len > 0) {
+                    for (var key in obj) {
+
+                        let value = (typeof obj[key] !== 'undefined') ? obj[key] : "xx";
+
+                        holder = `<span class="cmdName">${key}</span><span class="value#id#">${value}</span>`;
+                        $('.cmd[data-cmd_id=#id#] .container#id#').append(holder);
+                    }
+                }
+
+            } // if json_ok
+        }); // addUpdateFunction
+
+        jeedom.cmd.refreshValue([{
+            cmd_id: '#id#',
+            display_value: '#state#',
+            valueDate: '#valueDate#',
+            collectDate: '#collectDate#',
+            alertLevel: '#alertLevel#',
+            unit: '#unite#'
+        }]);
+    </script>
+</div>
