@@ -1,14 +1,15 @@
 # Jeedom_Widget_Json
 
-- For one of my project I needed a widget managing Json data instead of simple string.
+- Widget managing Json data instead of simple string as done by core widgets.
+- Thanks to the Jeedom Community 
   
 ## Json Input
-- The json data is submitted to Jeedom as raw string as the following
+- The json data is submitted to Jeedom as raw string as the following:
      ```json
       "{'Battery': '90', 'Temperature':'16,5', Humidity':'55'}"
     ```
-- if your data is the output of PHP script, make sure the format is in line with it is expected
-- Example of PHP code
+- if your data is the output of PHP script, make sure the format is OK.
+- Example of PHP code 
 ```php
 $json_string="{";
 foreach($result as $x => $val) {
@@ -50,8 +51,6 @@ $scenario->setData('JSON', $json_string);
 
 
 ![image](https://github.com/sinbrive/Jeedom_Widget_Json/assets/21102151/d3d80779-4031-42b9-bf48-9affeaa89342)
-
-
 
 ## Still Open
   - manage options
