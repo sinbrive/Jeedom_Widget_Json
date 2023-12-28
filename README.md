@@ -1,0 +1,1 @@
+# Jeedom_Widget_String_Json
