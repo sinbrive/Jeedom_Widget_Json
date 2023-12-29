@@ -54,3 +54,4 @@ $scenario->setData('JSON', $json_string);
 
 ## Still Open
   - manage options
+  - manage unities (nested Json)
